@@ -7,6 +7,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'main.js',
+        assetModuleFilename: 'assets/images/[hash][ext][query]'
     },
     resolve: {
         extensions:['.js']
@@ -30,6 +31,20 @@ module.exports = {
             {
                 test: /\.png/,
                 type: 'asset/resource'
+            },
+            {
+                test: /\.(woff|.woff2)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/font-woff",
+                        name: "[name].[ext]",
+                        outputPath: "./assets/fonts/",
+                        publicPath: "./asset/fonts/",
+                        esModule: false
+                    }
+                }
             }
         ]
     },
